@@ -7,8 +7,11 @@ function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
   const [homeScore, setHomeScore] = useState(0);
   const [awayScore, setAwayScore] = useState(0);
-  const [quarter, setQuarter] = useState(0);
-  const [down, setDown] = useState(0);
+  const [quarter, setQuarter] = useState(1);
+  const [down, setDown] = useState(1);
+  const [toGo, setToGo] = useState(10);
+  const [ballOn, setBallOn] = useState(null);
+  const [timer, setTimer] = useState('15:00');
   const tdHome = e => {
     setHomeScore(homeScore + 7);
   };
@@ -20,6 +23,36 @@ function App() {
   };
   const fgAway = e => {
     setAwayScore(awayScore + 3);
+  };
+  const increaseQt = e => {
+    setQuarter(quarter < 4 ? quarter + 1 : quarter - 3);
+  };
+  const resetHomeScore = e => {
+    setHomeScore(0);
+  };
+  const resetAwayScore = e => {
+    setAwayScore(0);
+  };
+  const increaseDown = e => {
+    if (down < 4) {
+      setDown(down + 1);
+    } else setDown(down - 3);
+    if (down === 1) {
+      setToGo(10);
+    }
+  };
+
+  // const timer = e => {
+  //   setTimer();
+  // };
+
+  const reset = () => {
+    setHomeScore(0);
+    setAwayScore(0);
+    setQuarter(1);
+    setDown(1);
+    setToGo(10);
+    setBallOn(null);
   };
 
   return (
@@ -33,13 +66,21 @@ function App() {
 
             <div className="home__score">{homeScore}</div>
           </div>
-          <div className="timer">00:03</div>
+          <div className="timer">{timer}</div>
           <div className="away">
             <h2 className="away__name">Tigers</h2>
             <div className="away__score">{awayScore}</div>
           </div>
         </div>
-        <BottomRow />
+        <BottomRow
+          quarter={quarter}
+          down={down}
+          togo={toGo}
+          ballon={ballOn}
+          resetHome={resetHomeScore}
+          resetAway={resetAwayScore}
+          resetAll={reset}
+        />
       </section>
       <section className="buttons">
         <div className="homeButtons">
@@ -60,7 +101,36 @@ function App() {
           </button>
         </div>
       </section>
+      <section className="buttons">
+        <div className="stretchButtons">
+          <ValueChanger valueChange={increaseDown} label="Down" />
+          <ValueChanger valueChange={toGo} label="To Go" />
+          <ValueChanger valueChange={ballOn} label="Ball On" />
+          <ValueChanger valueChange={increaseQt} label="Quarter" />
+          <ValueChanger valueChange={resetHomeScore} label="Reset Home Score" />
+          <ValueChanger valueChange={resetAwayScore} label="Reset Away Score" />
+          <ResetAll reset={reset} />
+        </div>
+      </section>
     </div>
+  );
+}
+
+function ValueChanger(props) {
+  const { valueChange, label } = props;
+  return (
+    <button className="quarterButton" onClick={valueChange}>
+      {label}
+    </button>
+  );
+}
+
+function ResetAll(props) {
+  const { reset } = props;
+  return (
+    <button className="quarterButton" onClick={reset}>
+      Reset All
+    </button>
   );
 }
 

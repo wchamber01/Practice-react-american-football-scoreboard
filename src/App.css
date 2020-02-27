@@ -5,10 +5,11 @@
 
 .scoreboard {
   width: 58%;
-  margin: 2rem auto;
+  margin: 10rem auto;
   background-color: #0b5402;
   color: white;
   border-radius: 0.5rem;
+  margin-top: 10rem;
   padding: 5rem;
   border: 4px solid #aaaaaa;
 }
@@ -53,7 +54,7 @@
 
 .home__score,
 .away__score {
-  font-family: "Ozone";
+  font-family: 'Ozone';
   font-size: 7rem;
   width: 90%;
   text-align: center;
@@ -63,7 +64,7 @@
 }
 
 .timer {
-  font-family: "Ozone";
+  font-family: 'Ozone';
   font-size: 9rem;
   padding: 2rem;
   text-align: center;
@@ -93,7 +94,7 @@
 .toGo__value,
 .ballOn__value,
 .quarter__value {
-  font-family: "Ozone";
+  font-family: 'Ozone';
   font-size: 5rem;
   color: var(--red);
   width: 7rem;
@@ -115,7 +116,8 @@
 .homeButtons__touchdown,
 .homeButtons__fieldGoal,
 .awayButtons__touchdown,
-.awayButtons__fieldGoal {
+.awayButtons__fieldGoal,
+.quarterButton {
   margin: 1rem;
   border-radius: 4px;
 }
